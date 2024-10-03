@@ -153,5 +153,21 @@ public class Application {
             });
             System.out.println("--------------------------------------");
         });
+
+        System.out.println("******************************Ex2**********************************");
+        // Calcola il totale delle vendite per ogni cliente utilizzando Stream e Lambda Expressions
+
+        Map<Customer, Double> sommaVenditeCliente = myOrders.stream()
+                .collect(Collectors.groupingBy(order -> order.getCustomer(), // Raggruppo per ottenere il cliente
+                        Collectors.summingDouble(order -> order.getProducts().stream() // Per ogni ordine ottiengo i prodotti e sommo
+                                .mapToDouble(product -> product.getPrice()) // Ottiengo il prezzo di ogni prodotto e trasformo ogni elemento dello stream in un double
+                                .sum()))); // Sommo i prezzi di tutti i prodotti
+
+        //Stampo il totale per ogni cliente
+        sommaVenditeCliente.forEach((customer, sum) -> {
+            System.out.println("Cliente: " + customer.getName() + " " + customer.getId());
+            System.out.println("Somma acquisti: " + sum);
+            System.out.println("--------------------------------------");
+        });
     }
 }
