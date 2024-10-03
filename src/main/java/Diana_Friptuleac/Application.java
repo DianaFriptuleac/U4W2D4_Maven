@@ -118,9 +118,9 @@ public class Application {
 
         // Ordine 11: "Be Ready When the Luck Happens" secondo ordine per Marco
         List<Product> eleventhOrderProducts = new ArrayList<>();
-        ninthOrderProducts.add(products.get(6)); // Be Ready When the Luck Happens
+        eleventhOrderProducts.add(products.get(6)); // Be Ready When the Luck Happens
         Order eleventhOrder = new Order(1254455, "Spedito", LocalDate.of(2024, 9, 15), LocalDate.now().plusDays(5), eleventhOrderProducts, marco);
-        myOrders.add(tenthOrder);
+        myOrders.add(eleventhOrder);
 
 
         System.out.println();
@@ -170,7 +170,8 @@ public class Application {
 
         System.out.println("******************************Ex3**********************************");
         //I prodotti piu costosi
-        Optional<Product> maxPriceProduct = products.stream().max(Comparator.comparingDouble(product -> product.getPrice()));
+        Optional<Product> maxPriceProduct = products.stream()
+                .max(Comparator.comparingDouble(product -> product.getPrice()));  //Confronto i prodotti in base al prezzo
         //stampo
         if (maxPriceProduct.isPresent()) {
             Product maxProduct = maxPriceProduct.get();
@@ -193,5 +194,15 @@ public class Application {
         } else {
             System.out.println("Non ci sono ordini.");
         }
+
+        System.out.println("******************************Ex5**********************************");
+        //Ragruppo prodotti per categorie e sommo gli importi x ogni categoria
+        Map<String, Double> somPCategorie = products.stream()
+                .collect(Collectors.groupingBy(product -> product.getCategory(), // Raggruppo per categoria
+                        Collectors.summingDouble(product -> product.getPrice()))); // Sommo i prezzi prodotti per ogni categoria
+
+        // Stampo
+        somPCategorie.forEach((category, som) -> System.out.println("Per la categoria " + category + " la somma degli importi è: €" + som));
+
     }
 }
