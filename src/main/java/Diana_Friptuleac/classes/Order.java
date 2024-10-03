@@ -11,9 +11,9 @@ public class Order {
     private List<Product> products;
     private Customer customer;
 
-    public Order(long id, String status, LocalDate orderDate, LocalDate deliveryDate,
+    public Order(long idOrder, String status, LocalDate orderDate, LocalDate deliveryDate,
                  List<Product> products, Customer customer) {
-        this.id = id;
+        this.id = idOrder;
         this.status = status;
         this.orderDate = orderDate;
         this.deliveryDate = deliveryDate;
@@ -21,11 +21,11 @@ public class Order {
         this.customer = customer;
     }
 
-    public long getId() {
+    public long getIdOrder() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setIdOrder(long id) {
         this.id = id;
     }
 
