@@ -178,5 +178,20 @@ public class Application {
         } else {
             System.out.println("Zero prodotti nella lista.");
         }
+
+        System.out.println("******************************Ex4**********************************");
+        //Media importi utente
+        OptionalDouble mediaImporti = myOrders.stream()
+                .mapToDouble(order -> order.getProducts().stream() // Per ogni ordine ottiengo i prodotti
+                        .mapToDouble(product -> product.getPrice()) // Per ogni prodotto ottiengo il prezzo
+                        .sum()) // sommo
+                .average(); //  media
+
+        // Stampo
+        if (mediaImporti.isPresent()) {
+            System.out.println("La media importi utenti è: " + mediaImporti.getAsDouble());
+        } else {
+            System.out.println("Non ci sono ordini.");
+        }
     }
 }
