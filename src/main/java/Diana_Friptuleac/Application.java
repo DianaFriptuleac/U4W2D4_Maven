@@ -5,9 +5,7 @@ import Diana_Friptuleac.classes.Order;
 import Diana_Friptuleac.classes.Product;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class Application {
@@ -169,5 +167,16 @@ public class Application {
             System.out.println("Somma acquisti: " + sum);
             System.out.println("--------------------------------------");
         });
+
+        System.out.println("******************************Ex3**********************************");
+        //I prodotti piu costosi
+        Optional<Product> maxPriceProduct = products.stream().max(Comparator.comparingDouble(product -> product.getPrice()));
+        //stampo
+        if (maxPriceProduct.isPresent()) {
+            Product maxProduct = maxPriceProduct.get();
+            System.out.println("L'articolo più costose è: " + maxProduct.getName() + ", Prezzo: " + maxProduct.getPrice() + " euro");
+        } else {
+            System.out.println("Zero prodotti nella lista.");
+        }
     }
 }
